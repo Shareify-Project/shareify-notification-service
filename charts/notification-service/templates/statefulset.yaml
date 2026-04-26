@@ -20,11 +20,6 @@ spec:
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           ports:
             - containerPort: {{ .Values.service.port }}
-          envFrom:
-            - configMapRef:
-                name: {{ .Release.Name }}-{{ .Chart.Name }}-config
-            - secretRef:
-                name: {{ .Release.Name }}-{{ .Chart.Name }}-secret
           volumeMounts:
             - name: data
               mountPath: {{ .Values.persistence.mountPath }}
@@ -47,4 +42,3 @@ spec:
     - port: {{ .Values.service.port }}
   selector:
     app: {{ .Chart.Name }}
-
