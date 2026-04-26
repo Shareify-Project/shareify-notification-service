@@ -7,6 +7,7 @@ imagePullSecrets:
   - name: ghcr-secret
 env:
   databasePath: "/app/data/notification.db"
+  smtpPassword: "change-me-password"
 service:
   type: ClusterIP
   port: 80
