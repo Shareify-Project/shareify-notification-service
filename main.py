@@ -60,3 +60,4 @@ async def send_email(request: EmailRequest):
 def health():
     return {"status": "healthy", "service": "shareify-notification-service"}
 
+
