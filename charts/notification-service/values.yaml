@@ -10,7 +10,7 @@ env:
   smtpPassword: "change-me-password"
 service:
   type: ClusterIP
-  port: 8000
+  port: 800000
 persistence:
   enabled: true
   storageClass: "nfs-client"
@@ -26,5 +26,6 @@ resources:
 
 config: {}
 secrets: {}
+
 
 
