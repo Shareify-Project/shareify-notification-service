@@ -1,0 +1,25 @@
+name: Notification Service CI Pipeline (Dev)
+
+on:
+  push:
+    branches: [ dev ]
+
+jobs:
+  sast-scan:
+    uses: Shareify-Project/shareify-workflows/.github/workflows/sast.yml@main
+    secrets: inherit
+
+  sca-scan:
+    needs: sast-scan
+    uses: Shareify-Project/shareify-workflows/.github/workflows/sca.yml@main
+    secrets: inherit
+
+  build-and-push:
+    needs: sca-scan
+    permissions:
+      contents: read
+      packages: write
+    uses: Shareify-Project/shareify-workflows/.github/workflows/build-and-push.yml@main
+    with:
+      image_name: shareify-notification-service
+    secrets: inherit

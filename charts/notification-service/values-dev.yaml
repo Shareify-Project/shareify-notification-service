@@ -1,16 +1,11 @@
-# values-dev.yaml
+# Dev environment overrides
 replicaCount: 1
+image:
+  tag: "latest"
 resources:
   requests:
     cpu: 10m
     memory: 16Mi
----
-# values-prod.yaml
-replicaCount: 2
-resources:
   limits:
-    cpu: 200m
-    memory: 256Mi
-  requests:
-    cpu: 50m
-    memory: 64Mi
+    cpu: 100m
+    memory: 128Mi
