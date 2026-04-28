@@ -6,11 +6,11 @@ image:
 imagePullSecrets:
   - name: ghcr-secret
 env:
-  databasePath: "/app/data/notification.db"
+  databaseUrl: "postgresql://postgres:shareify-secure-db-pass@postgres-db:5432/notification_service"
   smtpPassword: "change-me-password"
 service:
   type: ClusterIP
-  port: 80
+  port: 8000
 persistence:
   enabled: true
   storageClass: "nfs-client"
@@ -26,3 +26,12 @@ resources:
 
 config: {}
 secrets: {}
+
+
+
+
+
+
+
+
+

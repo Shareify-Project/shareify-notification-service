@@ -59,3 +59,5 @@ async def send_email(request: EmailRequest):
 @app.get("/health")
 def health():
     return {"status": "healthy", "service": "shareify-notification-service"}
+
+
