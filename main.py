@@ -14,19 +14,17 @@ from fastapi import Request
 from prometheus_client import make_asgi_app, Counter, Histogram
 
 app = FastAPI(title="Shareify Notification Service", version="1.1.0")
-# -- POSTGRESQL HOTFIX: SQLite Polyfill --------------------------------------
-# Automatically translates SQLite conn.execute() and '?' to PostgreSQL syntax
+# --
+# -- POSTGRESQL HOTFIX: SQLite Polyfill Helper -------------------------------
 import psycopg2
-from psycopg2.extensions import connection
+from psycopg2.extras import RealDictCursor
 
-def _sqlite_to_psycopg2_execute(self, query, vars=None):
+def db_execute(conn, query, vars=None):
     if '?' in query:
         query = query.replace('?', '%s')
-    cursor = self.cursor()
+    cursor = conn.cursor()
     cursor.execute(query, vars)
     return cursor
-
-connection.execute = _sqlite_to_psycopg2_execute
 # ----------------------------------------------------------------------------
 
 # ── Prometheus Metrics ──────────────────────────────────────────────────────
@@ -114,6 +112,7 @@ async def send_email(request: EmailRequest):
 @app.get("/health")
 def health():
     return {"status": "healthy", "service": "shareify-notification-service"}
+
 
 
 
